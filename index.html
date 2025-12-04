@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ola’s Art & Poetry</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-sky-top: #fdf7ff;
+      --bg-sky-mid: #e3f3ff;
+      --bg-sky-bottom: #ffece3;
+      --accent-1: #ff8fb1;
+      --accent-2: #8c9eff;
+      --accent-3: #ffd166;
+      --text-main: #2b2b3a;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.18);
+      --radius-xl: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Quicksand", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.8) 0, transparent 55%),
+        radial-gradient(circle at 90% 10%, rgba(255, 209, 102, 0.42) 0, transparent 60%),
+        radial-gradient(circle at 10% 90%, rgba(161, 231, 255, 0.5) 0, transparent 55%),
+        linear-gradient(to bottom, var(--bg-sky-top), var(--bg-sky-mid), var(--bg-sky-bottom));
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Soft star field overlay */
+    .stars {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.4;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 80px 80px, 120px 120px;
+      background-position: 0 0, 40px 40px;
+      z-index: -1;
+      animation: twinkle 12s linear infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0%   { opacity: 0.2; transform: translateY(0); }
+      100% { opacity: 0.5; transform: translateY(-10px); }
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 248, 246, 0.9)
+      );
+      border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 1.1rem;
+    }
+
+    .logo-orbit {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #ff8fb1);
+      box-shadow: 0 0 10px rgba(255, 143, 177, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 999px;
+      border: 1px dashed rgba(255, 255, 255, 0.8);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      margin-left: 1rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+      transform: translateY(-1px);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 3rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+      padding: 2.5rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 32px;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(255, 240, 255, 0.94)
+      );
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 209, 102, 0.45), transparent);
+      top: -120px;
+      right: -70px;
+      filter: blur(4px);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(140, 158, 255, 0.38), transparent);
+      bottom: -120px;
+      left: -50px;
+      filter: blur(4px);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #7460ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(140, 158, 255, 0.4);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-kicker-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff8fb1, #ffd166);
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 3.1vw, 3rem);
+      margin: 0 0 0.6rem;
+      color: #2b2140;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(120deg, #ff8fb1, #ffd166, #8c9eff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 32rem;
+    }
+
+    .hero-tags {
+      margin-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-tag {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 143, 177, 0.5);
+    }
+
+    .hero-actions {
+      margin-top: 1.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #ff8fb1, #ffd166);
+      color: #3c2430;
+      box-shadow: 0 12px 30px rgba(255, 143, 177, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(255, 143, 177, 0.6);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.95);
+      color: #5d4d7a;
+      border: 1px solid rgba(140, 158, 255, 0.5);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(246, 242, 255, 0.98);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+    }
+
+    .hero-art {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-orbit {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      border-radius: 999px;
+      padding: 1px;
+      background: conic-gradient(
+        from 180deg,
+        #ff8fb1,
+        #ffd166,
+        #8c9eff,
+        #ff8fb1
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-orbit-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 10%, #ffffff, #e3f3ff);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.24);
+    }
+
+    .hero-orbit-inner::before {
+      /* abstract moon */
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, #ffffff, #ffe6c2);
+      top: 16%;
+      right: 16%;
+      box-shadow: 0 0 40px rgba(255, 209, 102, 0.7);
+    }
+
+    .hero-orbit-inner::after {
+      /* horizon / forest silhouette */
+      content: "";
+      position: absolute;
+      left: -5%;
+      right: -5%;
+      bottom: -5%;
+      height: 45%;
+      background: radial-gradient(circle at 20% -20%, transparent 60%, #364254 62%),
+                  radial-gradient(circle at 70% -10%, transparent 60%, #232a3a 63%);
+      filter: drop-shadow(0 -8px 16px rgba(0, 0, 0, 0.45));
+    }
+
+    .hero-cloud {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 999px;
+      filter: drop-shadow(0 12px 25px rgba(15, 23, 42, 0.15));
+      opacity: 0.96;
+      animation: float 18s ease-in-out infinite alternate;
+    }
+
+    .hero-cloud.cloud-1 {
+      width: 120px;
+      height: 55px;
+      bottom: 28%;
+      left: 10%;
+    }
+
+    .hero-cloud.cloud-2 {
+      width: 160px;
+      height: 70px;
+      bottom: 34%;
+      right: 12%;
+      animation-duration: 22s;
+    }
+
+    .hero-cloud::before,
+    .hero-cloud::after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      border-radius: inherit;
+    }
+
+    .hero-cloud::before {
+      width: 60%;
+      height: 85%;
+      top: -40%;
+      left: 8%;
+    }
+
+    .hero-cloud::after {
+      width: 50%;
+      height: 75%;
+      top: -30%;
+      right: 5%;
+    }
+
+    @keyframes float {
+      0%   { transform: translateX(0) translateY(0); }
+      100% { transform: translateX(18px) translateY(-6px); }
+    }
+
+    .hero-stars {
+      position: absolute;
+      inset: 14% 14% 40% 14%;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
+      background-size: 50px 50px, 70px 70px;
+      background-position: 0 0, 25px 25px;
+      opacity: 0.65;
+    }
+
+    .hero-caption {
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(29, 31, 54, 0.9);
+      color: #fdfbff;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Generic section styling */
+    section {
+      margin-top: 2.5rem;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+      color: #2b2140;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(55, 65, 81, 0.7);
+      margin-bottom: 1.2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      padding: 1.6rem 1.6rem 1.4rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(14px);
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.76rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(140, 158, 255, 0.08);
+      border: 1px dashed rgba(140, 158, 255, 0.5);
+      margin-bottom: 0.8rem;
+    }
+
+    /* About section */
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 1.8rem;
+    }
+
+    .about-body p {
+      line-height: 1.8;
+      font-size: 0.98rem;
+      margin-top: 0.4rem;
+    }
+
+    .about-tags {
+      margin-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .about-tag {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 143, 177, 0.08);
+      border: 1px solid rgba(255, 143, 177, 0.6);
+    }
+
+    .about-side {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      font-size: 0.86rem;
+    }
+
+    .about-side h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .about-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.2rem 0 0;
+    }
+
+    .about-list li::before {
+      content: "✦";
+      margin-right: 0.45rem;
+      color: #ff8fb1;
+    }
+
+    /* Gallery section */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.4rem;
+      margin-top: 1.4rem;
+    }
+
+    .art-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 16px 35px rgba(15, 23, 42, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      display: flex;
+      flex-direction: column;
+      min-height: 260px;
+      position: relative;
+    }
+
+    .art-image {
+      position: relative;
+      padding: 0.9rem 0.9rem 0;
+    }
+
+    .art-image-inner {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: radial-gradient(circle at 10% 0, #fff, #fef3ff);
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .badge-360 {
+      position: absolute;
+      top: 1.3rem;
+      left: 1.4rem;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(17, 24, 39, 0.82);
+      color: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .badge-360 span {
+      display: inline-block;
+      font-size: 0.8em;
+      opacity: 0.85;
+    }
+
+    .art-body {
+      padding: 0.85rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      flex: 1;
+    }
+
+    .art-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: #1f2933;
+    }
+
+    .art-meta {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .art-desc {
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .art-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .pill-soft {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(140, 158, 255, 0.1);
+      color: #4b5563;
+    }
+
+    .price {
+      font-weight: 600;
+      color: #4b3b68;
+    }
+
+    .gallery-note {
+      margin-top: 0.9rem;
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+
+    /* Poetry section */
+    .poetry-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 1.6rem;
+    }
+
+    .poem-card {
+      border-radius: 18px;
+      padding: 1rem 1.2rem 1.1rem;
+      background: linear-gradient(
+        130deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(255, 243, 253, 0.96)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 25px rgba(148, 163, 184, 0.35);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .poem-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .poem-body {
+      white-space: pre-line;
+    }
+
+    /* Contact / shop */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 1.5rem;
+    }
+
+    .contact-grid label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-grid input,
+    .contact-grid textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 0.55rem 0.7rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    .contact-grid textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-grid input:focus,
+    .contact-grid textarea:focus {
+      border-color: #8c9eff;
+      box-shadow: 0 0 0 2px rgba(140, 158, 255, 0.25);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.4rem 1rem 2rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    footer span {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-inline: 1.4rem;
+      }
+
+      .hero-orbit {
+        max-width: 320px;
+      }
+
+      .about-layout,
+      .poetry-layout,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 0.4rem;
+      }
+
+      main {
+        padding-inline: 1rem;
+      }
+
+      .hero {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-orbit"></div>
+        <span>Ola’s Celestial Art</span>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#gallery">Paintings</a>
+        <a href="#poetry">Poetry</a>
+        <a href="#contact">Connect</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <div class="hero-kicker">
+          <span class="hero-kicker-dot"></span>
+          Paintings • Poetry • Soul
+        </div>
+        <h1>
+          A light-filled universe where
+          <span>nature, stars & feelings</span>
+          become art.
+        </h1>
+        <p class="hero-subtitle">
+          Welcome to Ola’s world — a space where constellations, clouds, trees, and tender
+          emotions flow into paintings and words. Each piece is a small universe, created to
+          feel warm, hopeful, and deeply human.
+        </p>
+
+        <div class="hero-tags">
+          <div class="hero-tag">✨ Celestial-inspired paintings</div>
+          <div class="hero-tag">🌿 Nature, flowers & skies</div>
+          <div class="hero-tag">📝 Poetry woven into art</div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#gallery" class="btn-primary">
+            View the Paintings
+            <span>→</span>
+          </a>
+          <a href="#poetry" class="btn-ghost">
+            Read Poetry
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-orbit">
+          <div class="hero-orbit-inner">
+            <div class="hero-stars"></div>
+            <div class="hero-cloud cloud-1"></div>
+            <div class="hero-cloud cloud-2"></div>
+            <div class="hero-caption">
+              Night sky • forest • gentle light
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <p class="section-kicker">About Ola</p>
+      <h2 class="section-title">The story behind the brush and the pen</h2>
+
+      <div class="card about-layout">
+        <div class="about-body">
+          <span class="pill">Artist • Poet • Dreamer</span>
+          <p>
+            Hi, I’m Ola. My art grew out of quiet moments staring at the night sky, watching
+            the moon change, noticing how light plays on leaves and clouds. Painting became a
+            language — a way to capture feelings that are too big for everyday words.
+          </p>
+          <p>
+            Over time, poetry joined the journey. Some days the poem arrives first and the
+            painting follows; other days a brushstroke inspires a verse. I love blending
+            both, so each piece can be felt not just with the eyes, but with the heart.
+          </p>
+          <p>
+            On this website, you’ll find paintings that explore constellations, flowers,
+            trees, and skies — all with a warm, hopeful tone. My wish is simple: that when
+            you visit, you feel a little more seen, a little more calm, and a little more
+            inspired.
+          </p>
+
+          <div class="about-tags">
+            <span class="about-tag">Constellations & astrology</span>
+            <span class="about-tag">Nature & seasons</span>
+            <span class="about-tag">Emotion-driven art</span>
+            <span class="about-tag">Poetry & reflection</span>
+          </div>
+        </div>
+
+        <div class="about-side">
+          <div>
+            <h3>What you’ll find here</h3>
+            <ul class="about-list">
+              <li>Original paintings with 360° views to see every angle</li>
+              <li>Warm, descriptive stories behind each piece</li>
+              <li>Poems that speak to the same feelings as the art</li>
+              <li>A gentle, celestial atmosphere — like walking through a dream</li>
+            </ul>
+          </div>
+          <div>
+            <h3>How I work</h3>
+            <ul class="about-list">
+              <li>Acrylics, mixed media, and ink on canvas</li>
+              <li>Nature and night skies as constant inspiration</li>
+              <li>Slow, intentional pieces made to be lived with for years</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <p class="section-kicker">Paintings</p>
+      <h2 class="section-title">Celestial & nature-inspired originals</h2>
+
+      <div class="card">
+        <p>
+          Each painting is shown with full detail, and where available, a 360° view so you
+          can see the sides, textures, and edges — just as if you were holding it in your
+          hands. Below are some example pieces you can replace with your own.
+        </p>
+
+        <div class="gallery-grid">
+          <!-- Art card 1 -->
+          <article class="art-card">
+            <div class="art-image">
+              <div class="badge-360">
+                ⟳ <span>360° view</span>
+              </div>
+              <div class="art-image-inner">
+                <!-- Replace this with an actual <img> when you have photos -->
+                Preview area for painting image
+              </div>
+            </div>
+            <div class="art-body">
+              <div class="art-title">“Moonlit Forest Whispers”</div>
+              <div class="art-meta">Acrylic on canvas · 16" x 20"</div>
+              <p class="art-desc">
+                A deep blue forest bathed in moonlight, where every tree feels like it’s
+                quietly listening. This piece is about stillness, intuition, and the comfort
+                of being surrounded by nature at night.
+              </p>
+              <div class="art-footer">
+                <span class="pill-soft">Theme: moon • trees • night</span>
+                <span class="price">$280</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Art card 2 -->
+          <article class="art-card">
+            <div class="art-image">
+              <div class="badge-360">
+                ⟳ <span>360° view</span>
+              </div>
+              <div class="art-image-inner">
+                Preview area for painting image
+              </div>
+            </div>
+            <div class="art-body">
+              <div class="art-title">“Constellation of Feelings”</div>
+              <div class="art-meta">Mixed media on canvas · 18" x 24"</div>
+              <p class="art-desc">
+                Soft pinks, golds, and midnight blues connect like stars creating a map of
+                emotions — love, loss, hope, and healing. A reminder that every feeling has
+                its place in the sky of who we are.
+              </p>
+              <div class="art-footer">
+                <span class="pill-soft">Theme: stars • emotion • cosmos</span>
+                <span class="price">$340</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Art card 3 -->
+          <article class="art-card">
+            <div class="art-image">
+              <div class="badge-360">
+                ⟳ <span>360° view</span>
+              </div>
+              <div class="art-image-inner">
+                Preview area for painting image
+              </div>
+            </div>
+            <div class="art-body">
+              <div class="art-title">“Fields of Soft Light”</div>
+              <div class="art-meta">Acrylic on canvas · 12" x 16"</div>
+              <p class="art-desc">
+                Gentle flowers under a pastel sky, painted to feel like a deep breath.
+                Bright yet calm, this piece carries a sense of quiet happiness and fresh
+                beginnings.
+              </p>
+              <div class="art-footer">
+                <span class="pill-soft">Theme: flowers • sunrise • hope</span>
+                <span class="price">$220</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="gallery-note">
+          <strong>Technical note:</strong> when you have 360° photos or rotating videos of
+          your paintings, you can embed them here using image sliders or a short looping
+          video, so visitors can rotate and see every angle of each piece.
+        </p>
+      </div>
+    </section>
+
+    <!-- POETRY -->
+    <section id="poetry">
+      <p class="section-kicker">Poetry</p>
+      <h2 class="section-title">Words that live in the same universe as the art</h2>
+
+      <div class="card poetry-layout">
+        <div>
+          <span class="pill">Poetry + Paintings</span>
+          <p>
+            Many of my paintings have a poem living beside them — a few lines that give
+            language to the feeling behind the colors and shapes. This space is for those
+            words. Over time, I’ll pair more poems with their paintings so you can experience
+            each piece in both image and text.
+          </p>
+          <p>
+            Think of this as a soft corner of the website where you can slow down, read, and
+            breathe for a moment.
+          </p>
+        </div>
+
+        <div>
+          <!-- Example poem block -->
+          <div class="poem-card">
+            <div class="poem-title">“Under a Listening Sky”</div>
+            <div class="poem-body">
+              tonight the trees lean in  
+              as if they’ve waited all day  
+              to hear you breathe  
+
+              the moon does not ask for words  
+              only that you look up  
+              and remember  
+
+              you are made  
+              of the same quiet light  
+              that keeps the dark  
+              from swallowing the stars
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / SHOP -->
+    <section id="contact">
+      <p class="section-kicker">Contact & Commissions</p>
+      <h2 class="section-title">Bring a piece of this universe into your home</h2>
+
+      <div class="card contact-grid">
+        <div>
+          <span class="pill">Purchase • Questions • Custom work</span>
+          <p>
+            If you’re interested in buying a painting, pairing a poem with a piece, or
+            commissioning something created just for you, I’d love to hear from you.
+            Describe what you’re drawn to — colors, themes, emotions — and we can dream
+            something up together.
+          </p>
+          <p>
+            You can also message me about availability, pricing, or upcoming collections.
+            Every inquiry is read with care.
+          </p>
+        </div>
+
+        <form>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" />
+
+          <label for="email" style="margin-top:0.6rem;">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" />
+
+          <label for="message" style="margin-top:0.6rem;">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me what you’re interested in..."></textarea>
+
+          <div style="margin-top:0.8rem;">
+            <button type="submit" class="btn-primary">Send message</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© Ola’s Art & Poetry — a universe of nature, stars, and feelings.</span>
+  </footer>
+</body>
+</html>
